@@ -1,16 +1,16 @@
 require('dotenv').config();
 
-const fs = require('fs');
+import { readdirSync } from 'fs';
 const token = process.env['QR_BOT_TOKEN'];
 const clientId = process.env['CLIENT_ID'];
 const guildId = process.env['GUILD_ID'];
 
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+import { SlashCommandBuilder } from '@discordjs/builders';
+import { REST } from '@discordjs/rest';
+import { Routes } from 'discord-api-types/v9';
 
 const commands = [];
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
